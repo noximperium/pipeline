@@ -7,6 +7,7 @@ use Exception;
 class RequestPipeline
 {
   private $pipes = [];
+  private $action;
 
   private function __construct($pipes)
   {
@@ -22,7 +23,7 @@ class RequestPipeline
   {
     $lastIndex = count($pipes) - 1;
 
-    for($i = 0; $i < $lastIndex; $i++) {
+    for ($i = 0; $i < $lastIndex; $i++) {
       if ($i !== $lastIndex) $pipes[$i]->next = $pipes[$i + 1];
     }
 
@@ -31,7 +32,9 @@ class RequestPipeline
 
   public function addPipe($pipe)
   {
-    if (get_parent_class($pipe) !== "NoxImperium\\RequestPipeline\\Pipe") throw new Exception('This class does not extends Pipe class.');
+    if (get_parent_class($pipe) !== "NoxImperium\\RequestPipeline\\Pipe") {
+      throw new Exception('Passed class on `addPipe` does not extends Pipe class.');
+    }
 
     $this->pipes[] = $pipe;
 
@@ -43,8 +46,22 @@ class RequestPipeline
     return $this;
   }
 
-  public function execute($request)
+  public function setAction($action)
   {
+    if (get_parent_class($action) !== "NoxImperium\\RequestPipeline\\Action") {
+      throw new Exception('Passed class on `setAction` does not extends Action class.');
+    }
+
+    $this->action = $action;
+
+    return $this;
+  }
+
+  public function run($request)
+  {
+    $lastIndex = count($this->pipes) - 1;
+    $this->pipes[$lastIndex]->setAction($this->action);
+
     return $this->pipes[0]->handle($request);
   }
 }
