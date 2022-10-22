@@ -1,8 +1,8 @@
 <?php
 
-namespace NoxImperium\RequestPipeline\Tests\Pipes;
+namespace NoxImperium\Pipeline\Tests\Pipes;
 
-use NoxImperium\RequestPipeline\Pipe;
+use NoxImperium\Pipeline\Pipe;
 
 class Jsonify extends Pipe
 {

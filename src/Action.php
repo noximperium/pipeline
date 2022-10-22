@@ -1,6 +1,6 @@
 <?php
 
-namespace NoxImperium\RequestPipeline;
+namespace NoxImperium\Pipeline;
 
 abstract class Action
 {

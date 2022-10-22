@@ -1,10 +1,10 @@
 <?php
 
-namespace NoxImperium\RequestPipeline;
+namespace NoxImperium\Pipeline;
 
 use Exception;
 
-class RequestPipeline
+class Pipeline
 {
   private $pipes = [];
   private $action;
@@ -16,7 +16,7 @@ class RequestPipeline
 
   public static function build()
   {
-    return new RequestPipeline([]);
+    return new Pipeline([]);
   }
 
   public static function from($pipes)
@@ -27,12 +27,12 @@ class RequestPipeline
       if ($i !== $lastIndex) $pipes[$i]->next = $pipes[$i + 1];
     }
 
-    return new RequestPipeline($pipes);
+    return new Pipeline($pipes);
   }
 
   public function addPipe($pipe)
   {
-    if (get_parent_class($pipe) !== "NoxImperium\\RequestPipeline\\Pipe") {
+    if (get_parent_class($pipe) !== "NoxImperium\\Pipeline\\Pipe") {
       throw new Exception('Passed class on `addPipe` does not extends Pipe class.');
     }
 
@@ -48,7 +48,7 @@ class RequestPipeline
 
   public function setAction($action)
   {
-    if (get_parent_class($action) !== "NoxImperium\\RequestPipeline\\Action") {
+    if (get_parent_class($action) !== "NoxImperium\\Pipeline\\Action") {
       throw new Exception('Passed class on `setAction` does not extends Action class.');
     }
 

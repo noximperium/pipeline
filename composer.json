@@ -1,5 +1,5 @@
 {
-  "name": "noximperium/request-pipeline",
+  "name": "noximperium/pipeline",
   "description": "",
   "require": {
     "php": ">=7.0.2"
@@ -15,8 +15,8 @@
   },
   "autoload": {
     "psr-4": {
-      "NoxImperium\\RequestPipeline\\": "src/",
-      "NoxImperium\\RequestPipeline\\Tests\\": "tests/"
+      "NoxImperium\\Pipeline\\": "src/",
+      "NoxImperium\\Pipeline\\Tests\\": "tests/"
     }
   }
 }

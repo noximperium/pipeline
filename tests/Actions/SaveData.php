@@ -1,8 +1,8 @@
 <?php
 
-namespace NoxImperium\RequestPipeline\Tests\Actions;
+namespace NoxImperium\Pipeline\Tests\Actions;
 
-use NoxImperium\RequestPipeline\Action;
+use NoxImperium\Pipeline\Action;
 
 class SaveData extends Action
 {

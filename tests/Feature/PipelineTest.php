@@ -1,9 +1,9 @@
 <?php
 
-use NoxImperium\RequestPipeline\RequestPipeline;
-use NoxImperium\RequestPipeline\Tests\Actions\SaveData;
-use NoxImperium\RequestPipeline\Tests\Pipes\Authentication;
-use NoxImperium\RequestPipeline\Tests\Pipes\Jsonify;
+use NoxImperium\Pipeline\Pipeline;
+use NoxImperium\Pipeline\Tests\Actions\SaveData;
+use NoxImperium\Pipeline\Tests\Pipes\Authentication;
+use NoxImperium\Pipeline\Tests\Pipes\Jsonify;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -21,32 +21,32 @@ test('asserts missing action throw exception', function () {
     'data' => 'test data'
   ];
 
-  $pipeline = RequestPipeline::build()
+  $pipeline = Pipeline::build()
     ->addPipe(new  Authentication)
     ->addPipe(new Jsonify);
 
   $pipeline->run($request);
 })->throws('Action has not been set.');
 
-test('asserts passed object to `addPipe` that not extends NoxImperium\RequestPipeline\Pipe throw exception', function () {
+test('asserts passed object to `addPipe` that not extends NoxImperium\Pipeline\Pipe throw exception', function () {
   $request = [
     'auth_key' => 'afafdsf987asf98as98f7as',
     'data' => 'test data'
   ];
 
-  $pipeline = RequestPipeline::build()
+  $pipeline = Pipeline::build()
     ->addPipe(new TestPipe);
 
   $pipeline->run($request);
 })->throws('Passed class on `addPipe` does not extends Pipe class.');
 
-test('asserts passed object to `setAction` that not extends NoxImperium\RequestPipeline\Action throw exception', function () {
+test('asserts passed object to `setAction` that not extends NoxImperium\Pipeline\Action throw exception', function () {
   $request = [
     'auth_key' => 'afafdsf987asf98as98f7as',
     'data' => 'test data'
   ];
 
-  $pipeline = RequestPipeline::build()
+  $pipeline = Pipeline::build()
     ->addPipe(new Authentication)
     ->setAction(new TestAction);
 
@@ -59,7 +59,7 @@ test('asserts no pipes set throw exception', function () {
     'data' => 'test data'
   ];
 
-  $pipeline = RequestPipeline::build()
+  $pipeline = Pipeline::build()
     ->setAction(new SaveData);
 
   $pipeline->run($request);
@@ -71,7 +71,7 @@ test('asserts valid pipes and action returns processed data.', function () {
     'data' => 'test data'
   ];
 
-  $pipeline = RequestPipeline::build()
+  $pipeline = Pipeline::build()
     ->addPipe(new Authentication)
     ->addPipe(new Jsonify)
     ->setAction(new SaveData);
