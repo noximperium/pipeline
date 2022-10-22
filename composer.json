@@ -1,0 +1,21 @@
+{
+  "name": "noximperium/request-pipeline",
+  "description": "",
+  "require": {
+    "php": ">=7.0.2"
+  },
+  "require-dev": {
+    "pestphp/pest": "^1.22",
+    "subiabre/appgati": "^2.0"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "NoxImperium\\RequestPipeline\\": "src/"
+    }
+  }
+}
