@@ -20,6 +20,12 @@ class RequestPipeline
 
   public static function from($pipes)
   {
+    $lastIndex = count($pipes) - 1;
+
+    for($i = 0; $i < $lastIndex; $i++) {
+      if ($i !== $lastIndex) $pipes[$i]->next = $pipes[$i + 1];
+    }
+
     return new RequestPipeline($pipes);
   }
 
@@ -37,7 +43,6 @@ class RequestPipeline
     return $this;
   }
 
-  // Create curried function from next execute
   public function execute($request)
   {
     return $this->pipes[0]->handle($request);
