@@ -8,10 +8,8 @@ class Uppercaser extends Pipe
 {
   public function handle($request)
   {
-    return [
-      'status' => '200',
-      'text' => 'success',
-      'data' => strtoupper($request['data']),
-    ];
+    $request['data'] = strtoupper($request['data']);
+
+    return $this->passDown($request);
   }
 }
