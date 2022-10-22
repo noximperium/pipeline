@@ -15,7 +15,8 @@
   },
   "autoload": {
     "psr-4": {
-      "NoxImperium\\RequestPipeline\\": "src/"
+      "NoxImperium\\RequestPipeline\\": "src/",
+      "NoxImperium\\RequestPipeline\\Tests\\": "tests/"
     }
   }
 }

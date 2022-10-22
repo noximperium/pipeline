@@ -59,6 +59,9 @@ class RequestPipeline
 
   public function run($request)
   {
+    if (count($this->pipes) === 0) throw new Exception('No pipe has been added.');
+    if ($this->action === null) throw new Exception('Action has not been set.');
+
     $lastIndex = count($this->pipes) - 1;
     $this->pipes[$lastIndex]->setAction($this->action);
 
