@@ -1,5 +1,6 @@
 {
   "name": "noximperium/pipeline",
+  "version": "0.1",
   "description": "",
   "require": {
     "php": ">=7.0.2"
