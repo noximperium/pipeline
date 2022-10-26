@@ -11,7 +11,7 @@ class Authentication extends Pipe
     if (!isset($request['auth_key'])) return $this->getMissingHeaderResponse();
     if ($request['auth_key'] === null) return $this->getUnauthenticatedResponse();
 
-    return $this->passDown($request);
+    return $this->next($request);
   }
 
   private function getMissingHeaderResponse()

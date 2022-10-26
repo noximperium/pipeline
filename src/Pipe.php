@@ -9,7 +9,7 @@ abstract class Pipe
 
   public abstract function handle($request);
 
-  public function passDown($request)
+  public function next($request)
   {
     if ($this->action !== null) return $this->action->process($request);
     return $this->next->handle($request);

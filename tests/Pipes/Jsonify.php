@@ -8,7 +8,7 @@ class Jsonify extends Pipe
 {
   public function handle($request)
   {
-    $response = $this->passDown($request);
+    $response = $this->next($request);
 
     return json_encode($response);
   }
